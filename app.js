@@ -27,11 +27,18 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
+// create the index file route for the client side
 app.get("/campgrounds", async (req, res) => {
   const campgrounds = await Campground.find({});
   res.render("campgrounds/index", { campgrounds });
 });
 
+// create the show file route for the client side
+app.get("/campgrounds/:id", async (req, res) => {
+  const { id } = req.params;
+  const campground = await Campground.findById(id);
+  res.render("campgrounds/show", { campground });
+});
 // localhost
 app.listen(3005, () => {
   console.log("APP IS LISTENING ON PORT 3005");
