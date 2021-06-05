@@ -56,8 +56,8 @@ app.post("/campgrounds", async (req, res) => {
 // create the show file route for the client side
 app.get("/campgrounds/:id", async (req, res) => {
   const { id } = req.params;
-  const campground = await Campground.findById(id);
-  res.render("campgrounds/show", { campground });
+  const foundCampground = await Campground.findById(id);
+  res.render("campgrounds/show", { foundCampground });
 });
 
 // create the route that serves the form html file for the client side
@@ -74,6 +74,13 @@ app.put("/campgrounds/:id", async (req, res) => {
     ...req.body.editCampground,
   });
   res.redirect(`/campgrounds/${editCampground._id}`);
+});
+
+//Delete a data
+app.delete("/campgrounds/:id", async (req, res) => {
+  const { id } = req.params;
+  const deleteCampground = await Campground.findByIdAndDelete(id);
+  res.redirect("/campgrounds");
 });
 
 // localhost
