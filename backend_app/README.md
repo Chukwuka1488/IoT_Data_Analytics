@@ -2,7 +2,7 @@
 
 ### Introducing OnyxCamp
 
-1. Creating the basic Express App
+1. Creating the basic Express App using TypeScript
    1a. npm init -y
    1b. npm i express mongoose ejs
    1c. touch index.js
