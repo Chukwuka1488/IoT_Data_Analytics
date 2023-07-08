@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import request from 'supertest';
-import { app } from './server';
-import "./test.config"; // Import the test configuration file first
+import { app } from '../src/server';
+import "../config/test.config"; // Import the test configuration file first
 
 describe('Server', () => {
   it('should respond with "Hello, World!"', (done) => {
