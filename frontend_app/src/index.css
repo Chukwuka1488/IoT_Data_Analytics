@@ -1,3 +1,4 @@
+/* Reset styles */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +11,117 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* App */
+.App {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+/* Home Bar */
+.home-bar {
+  width: 6%;
+  background-color: #56e6e4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin: 5% 1.5% 5% 3%;
+}
+
+.icon {
+  margin-bottom: 1rem;
+}
+
+/* Card Container */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 34%;
+  margin: 5% 1.5% 5% 1.5%;
+}
+
+/* Power Card */
+.power-card {
+  width: 100%;
+  height: 55%;
+  background-color: #a22a2a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin-top: 1rem;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.power-card h2 {
+  margin-bottom: 1rem;
+}
+
+/* Weather Card */
+.weather-card {
+  width: 100%;
+  height: 45%;
+  background-color: #76dd93;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.weather-card h2 {
+  margin-bottom: 1rem;
+}
+
+/* Big Card */
+.big-card {
+  width: 51%;
+  background-color: #b1bb52;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin: 5% 3% 5% 3%;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.big-card h2 {
+  margin-bottom: 1rem;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .home-bar {
+    width: 10%;
+  }
+
+  .card-container {
+    width: 48%;
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .home-bar {
+    width: 20%;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .card-container {
+    width: 90%;
+    margin-right: 0;
+    margin-bottom: 2rem;
+  }
 }
