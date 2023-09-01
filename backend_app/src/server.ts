@@ -9,7 +9,7 @@ app.use(cors({
 }));
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello, World!");
+  res.send("Hello from Kubernetes, World!");
   // res.json({"users": ['one', 'two', 'three', 'four']});
 });
 
