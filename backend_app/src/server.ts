@@ -1,7 +1,7 @@
-import express, { Request, Response } from "express";
+import express, { Application, Request, Response } from "express";
 import cors from "cors";
 
-const app = express();
+const app: Application = express();
 const port = process.env.NODE_ENV === "test" ? 4000 : 3500; // Use environment variable
 
 app.use(cors({

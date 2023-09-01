@@ -2,10 +2,11 @@
   "name": "iot_data_analytics",
   "version": "1.0.0",
   "description": "### Introducing OnyxCamp",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"tsc -w\" \"nodemon dist/server.js\"",
+    "test": "mocha -r ts-node/register 'tests/**/*.ts'",
+    "start": "node ./dist/server.js",
+    "dev": "nodemon src/server.ts",
     "build": "tsc"
   },
   "repository": {
@@ -26,9 +27,11 @@
     "typescript": "^5.1.6"
   },
   "devDependencies": {
+    "@tsconfig/node14": "^14.1.0",
     "@types/chai": "^4.3.5",
     "@types/cors": "^2.8.13",
     "@types/mocha": "^10.0.1",
+    "@types/node": "^20.5.7",
     "@types/supertest": "^2.0.12",
     "chai": "^4.3.7",
     "concurrently": "^8.2.0",

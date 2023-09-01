@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: express-backend-service
+spec:
+  selector:
+    app: express-backend
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 8008
+    targetPort: 3500
+    nodePort: 31000

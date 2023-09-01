@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-backend-deployment
+  labels:
+    app: express-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: express-backend
+  template:
+    metadata:
+      labels:
+        app: express-backend
+    spec:
+      containers:
+      - name: express-server
+        image: chukwuka1488/express-backend:latest
+        resources:
+          limits:
+            memory: "128Mi" # Express server is not allowed to use more than 128 MiB of RAM. If it tries to use more than this limit, the container might be restarted.
+            cpu: "500m" # This means your container can use up to 50% of a single CPU core.
+        ports:
+        - containerPort: 3500
