@@ -1,0 +1,39 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # or your default branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
+      run: docker build -t chukwuka1488/express-backend:${{ github.sha }} .
+
+    - name: Login to Docker Hub
+      run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+      env:
+        DOCKER_HUB_USERNAME: your-dockerhub-username
+        DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+    - name: Push Docker image
+      run: docker push chukwuka1488/express-backend:${{ github.sha }}
+
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v1
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl config use-context your-kube-context
+        kubectl set image deployment/express-backend-deployment express-server=chukwuka1488/express-backend:${{ github.sha }}
+      env:
+        KUBECONFIG_FILE: ${{ secrets.KUBECONFIG_FILE }}
+
+    - name: Check rollout status
+      run: kubectl rollout status deployment/express-backend-deployment
