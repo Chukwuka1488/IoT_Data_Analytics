@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # or your default branch name
+      - main  # CONFIGURE: Ensure you specify your default branch name here, if it's not "main"
 
 jobs:
   build:
@@ -15,25 +15,30 @@ jobs:
 
     - name: Build Docker image
       run: docker build -t chukwuka1488/express-backend:${{ github.sha }} .
+      # CONFIGURE: Modify the image name "chukwuka1488/express-backend" if needed
 
     - name: Login to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
       env:
-        DOCKER_HUB_USERNAME: your-dockerhub-username
-        DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+        DOCKER_HUB_USERNAME: chukwuka1488  # CONFIGURE: Replace with your DockerHub username
+        DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}  # CONFIGURE: Ensure you set up this secret in your GitHub repository
 
     - name: Push Docker image
       run: docker push chukwuka1488/express-backend:${{ github.sha }}
+      # CONFIGURE: Modify the image name "chukwuka1488/express-backend" if needed
 
     - name: Set up kubectl
       uses: azure/setup-kubectl@v1
 
     - name: Deploy to Kubernetes
       run: |
-        kubectl config use-context your-kube-context
+        kubectl config use-context docker-desktop  
         kubectl set image deployment/express-backend-deployment express-server=chukwuka1488/express-backend:${{ github.sha }}
+      # CONFIGURE: Modify any Kubernetes specifics if needed, like deployment name or image name
+      # CONFIGURE: If you're deploying to another context, modify this
       env:
-        KUBECONFIG_FILE: ${{ secrets.KUBECONFIG_FILE }}
+        KUBECONFIG_FILE: ${{ secrets.KUBECONFIG_FILE }}  # CONFIGURE: Ensure you set up this secret in your GitHub repository, containing your Kubeconfig file details
 
     - name: Check rollout status
       run: kubectl rollout status deployment/express-backend-deployment
+      # CONFIGURE: Modify "express-backend-deployment" if your deployment has a different name
