@@ -26,25 +26,3 @@ jobs:
     - name: Push Docker image
       run: docker push chukwuka1488/express-backend:${{ github.sha }}
       # CONFIGURE: Modify the image name "chukwuka1488/express-backend" if needed
-
-    - name: Set up kubectl
-      uses: azure/setup-kubectl@v1
-
-    - name: Setup Kubernetes config
-      run: echo "${{ secrets.KUBECONFIG_FILE }}" > ./kubeconfig.yml
-      env:
-        KUBECONFIG: ./kubeconfig.yml
-
-    - name: List Kubernetes contexts
-      run: kubectl config get-contexts
-
-    - name: Deploy to Kubernetes
-      run: |
-        kubectl config use-context docker-desktop
-        kubectl set image deployment/express-backend-deployment express-server=chukwuka1488/express-backend:${{ github.sha }}
-      # CONFIGURE: Modify any Kubernetes specifics if needed, like deployment name or image name
-      # CONFIGURE: If you're deploying to another context, modify this
-
-    - name: Check rollout status
-      run: kubectl rollout status deployment/express-backend-deployment
-      # CONFIGURE: Modify "express-backend-deployment" if your deployment has a different name

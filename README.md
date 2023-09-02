@@ -123,4 +123,9 @@ kubectl get services
 ```bash
 kubectl port-forward pod/my-app-pod 8080:5000
 ```
-
+```bash
+docker build -t chukwuka1488/express-backend .
+docker push chukwuka1488/express-backend
+ kubectl apply -f node-ts-deployment.yaml
+ kubectl apply -f node-ts-service.yaml
+ ```
